@@ -8,7 +8,7 @@ public class HerCDNServer {
 
     public static void main(String[] args) {
         final int PORT = 40400;
-        final String FILENAME = "C:\\Users\\Arslaan\\Documents\\706_Project\\src\\video.mp4";
+        final String FILENAME = "src/video.mp4";
         FileInputStream fileIn;
         BufferedInputStream buffer;
         OutputStream out;
@@ -17,7 +17,7 @@ public class HerCDNServer {
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
             while(true){
-                System.out.println("server is waiting");
+                System.out.println("Running herCDNServer...");
                 socket = serverSocket.accept();
                 System.out.println("Found: " + socket);
                 File file = new File (FILENAME);

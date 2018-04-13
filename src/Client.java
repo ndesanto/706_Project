@@ -52,7 +52,7 @@ public class Client {
         String response = new String(packet.getData(),0,packet.getLength());
         System.out.println(response + " is herCDNs IP");
         //ReceiveFile file = new ReceiveFile();
-        String NEWFILENAME = "C:\\Users\\Arslaan\\Documents\\706_Project\\src\\newvideo.mp4";
+        String NEWFILENAME = "src/newvideo.mp4";
         Socket socket = new Socket(ip2, 40400);
         System.out.println("Connecting");
 
@@ -74,36 +74,4 @@ public class Client {
                 + " downloaded (" + current + " bytes read)");
 
     }
-
-    public static class ReceiveFile {
-
-        public final static int PORT = 40400;
-        public final static String SERVER = ip2;
-        public final static String NEWFILENAME = "C:\\Users\\Arslaan\\Documents\\706_Project\\src\\newvideo.mp4";
-
-        public static void main(String[] args) throws IOException {
-            Socket socket = new Socket(SERVER, PORT);
-            System.out.println("Connecting");
-
-            byte[] fileBuffer = new byte[400000];
-            InputStream in = socket.getInputStream();
-            FileOutputStream fileOut = new FileOutputStream(NEWFILENAME);
-            BufferedOutputStream buffer = new BufferedOutputStream(fileOut);
-            int bytesRead = in.read(fileBuffer, 0, fileBuffer.length);
-            int current = bytesRead;
-
-            do {
-                bytesRead = in.read(fileBuffer, current, (fileBuffer.length - current));
-                if (bytesRead >= 0) current += bytesRead;
-            } while (bytesRead > -1);
-
-            buffer.write(fileBuffer, 0, current);
-            buffer.flush();
-            System.out.println("File " + NEWFILENAME
-                    + " downloaded (" + current + " bytes read)");
-
-        }
-
-    }
-
 }
