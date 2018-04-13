@@ -24,14 +24,18 @@ public class ClientServer {
                 packet = new DatagramPacket(buffer, buffer.length,a,p);
                 String answer = new String(packet.getData(), 0, packet.getLength());
 
-                System.out.println(answer);
-                if (Integer.parseInt(answer.trim()) == 1) {
-                    System.out.println("hello");
+                String videonum = answer.substring(0,1);
+                String type = answer.substring(1);
+                if(type.equals('V')){
 
-                }
-                else
-                    System.out.println("notwork");
+                    if (Integer.parseInt(videonum.trim()) == 1) {
+                        System.out.println("Works!");
+
+                    }
+                    else
+                        System.out.println("notwork");
         }
+    }
 
 
 }

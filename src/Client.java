@@ -3,6 +3,8 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
+import static java.lang.Thread.sleep;
+
 public class Client {
     static Config configuration = new Config();
     public static String ip1 = configuration.IP1;
@@ -13,7 +15,7 @@ public class Client {
     public static String port = configuration.PORT;
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         //Part 1
         DatagramSocket toServ= new DatagramSocket();
@@ -34,7 +36,9 @@ public class Client {
         Desktop.getDesktop().browse(htmlFile.toURI());
 
         String videonum = JOptionPane.showInputDialog( "Which video would you like to watch?");
-        System.out.println(videonum);
+        videonum += "V";
+        sleep(3000);
+        System.out.println("wait...");
 
         //Part 2
         byte[] buffer = videonum.getBytes();
