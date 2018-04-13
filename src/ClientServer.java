@@ -11,22 +11,23 @@ public class ClientServer {
     public static String port = configuration.PORT;
 
     public static void main(String[] args) throws IOException {
-
-        ServerSocket listener = new ServerSocket(9090);
-        try {
-            while (true) {
-                Socket socket = listener.accept();
-                try {
-                    PrintWriter out =
-                            new PrintWriter(socket.getOutputStream(), true);
-                    out.println(port + " " + ip1 + " " + protocol);
-                } finally {
-                    socket.close();
+        String IP = ip1;
+        byte buffer[] = new byte[128];
+        DatagramSocket server = new DatagramSocket(40400);
+        ServerSocket listener = new ServerSocket(40400);
+        System.out.println("Running ClientServer....");
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+                server.receive(packet);
+                int p = packet.getPort();
+                InetAddress a = packet.getAddress();
+                packet = new DatagramPacket(buffer, buffer.length,a,p);
+                String answer = new String(packet.getData(), 0, packet.getLength());
+                System.out.println(answer);
+                if (answer.equals("1")) {
+                    System.out.println("hello");
+                    
                 }
-            }
         }
-        finally {
-            listener.close();
-        }
-    }
+
+
 }
