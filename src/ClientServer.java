@@ -25,8 +25,9 @@ public class ClientServer {
                 String answer = new String(packet.getData(), 0, packet.getLength());
 
                 String videonum = answer.substring(0,1);
-                String type = answer.substring(1);
-                if(type.equals('V')){
+                String type = answer.substring(1,2);
+
+                if((type.charAt(0)) == 'V'){
 
                     if (Integer.parseInt(videonum.trim()) == 1) {
                         System.out.println("Works!");
