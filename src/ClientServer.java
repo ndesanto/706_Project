@@ -14,8 +14,9 @@ public class ClientServer {
         // Part 1
         String IP = ip1;
         byte buffer[] = new byte[128];
+        byte buffer2[] = new byte[128];
         DatagramSocket server = new DatagramSocket(40400);
-        DatagramSocket server2= new DatagramSocket(40401);
+       // DatagramSocket server2= new DatagramSocket(40401);
             //ServerSocket listener = new ServerSocket(40400);
         System.out.println("Running ClientServer....");
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
@@ -31,12 +32,17 @@ public class ClientServer {
                 if((type.charAt(0)) == 'V'){
 
                     if (Integer.parseInt(videonum.trim()) == 1) {
-                        System.out.println("Works!");
-                        DatagramPacket packet2 = new DatagramPacket(buffer, buffer.length);
-                        server2.receive(packet2);
-                        int p2 = packet2.getPort();
-                        InetAddress a2 = packet2.getAddress();
-                        packet2 = new DatagramPacket(buffer, buffer.length,a2,p2);
+                        System.out.println("Works! Received Request for Video 1");
+                        InetAddress aSend = InetAddress.getByName(ip2);
+
+                        buffer = type.getBytes();
+                        DatagramPacket packet2 = new DatagramPacket(buffer,buffer.length,aSend,40402);
+                        server.send(packet2);
+
+                        packet2 = new DatagramPacket(buffer2,buffer2.length);
+                        server.receive(packet2);
+                        String received = new String(packet2.getData(),0,packet2.getLength());
+                        System.out.println(received + " Is HerCDN IP");
                         
 
                     }

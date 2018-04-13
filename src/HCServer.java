@@ -1,7 +1,5 @@
-import java.awt.*;
 import java.io.*;
 import java.net.*;
-import javax.swing.*;
 
 public class HCServer {
     static Config configuration = new Config();
