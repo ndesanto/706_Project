@@ -15,6 +15,7 @@ public class ClientServer {
         String IP = ip1;
         byte buffer[] = new byte[128];
         DatagramSocket server = new DatagramSocket(40400);
+        DatagramSocket server2= new DatagramSocket(40401);
             //ServerSocket listener = new ServerSocket(40400);
         System.out.println("Running ClientServer....");
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
@@ -31,6 +32,12 @@ public class ClientServer {
 
                     if (Integer.parseInt(videonum.trim()) == 1) {
                         System.out.println("Works!");
+                        DatagramPacket packet2 = new DatagramPacket(buffer, buffer.length);
+                        server2.receive(packet2);
+                        int p2 = packet2.getPort();
+                        InetAddress a2 = packet2.getAddress();
+                        packet2 = new DatagramPacket(buffer, buffer.length,a2,p2);
+                        
 
                     }
                     else
