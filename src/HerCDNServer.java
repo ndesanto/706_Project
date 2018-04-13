@@ -6,6 +6,11 @@ import java.net.ServerSocket;
 
 public class HerCDNServer {
 
+    /*
+        Sends the client the video over a TCP connection
+
+    */
+
     public static void main(String[] args) {
         final int PORT = 40400;
         final String FILENAME = "src/video.mp4";

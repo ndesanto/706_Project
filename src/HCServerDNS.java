@@ -5,16 +5,13 @@ import static java.lang.Thread.sleep;
 
 public class HCServerDNS {
     static Config configuration = new Config();
-//    public static String ip1 = configuration.IP1;
-//    public static String ip2 = configuration.IP2;
     public static String ip3 = configuration.IP3;
-//    public static String ip4 = configuration.IP4;
-//    public static String protocol = configuration.PROTOCOL;
-//    public static String port = configuration.PORT;
+
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
         // Part 3
+        // DNS communication with the local Client server
         String IP3 = ip3;
         byte buffer[] = new byte[128];
         byte buffer2[] = new byte[128];

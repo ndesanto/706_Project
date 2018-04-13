@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.color.ICC_Profile;
 import java.io.*;
 import java.net.*;
 
@@ -10,13 +9,12 @@ public class Client {
     static Config configuration = new Config();
     public static String ip1 = configuration.IP1;
     public static String ip2 = configuration.IP2;
-//    public static String ip3 = configuration.IP3;
-//    public static String ip4 = configuration.IP4;
-//    public static String protocol = configuration.PROTOCOL;
-//    public static String port = configuration.PORT;
+
 
     public static void main(String[] args) throws IOException, InterruptedException {
         //Part 1
+        // Opens up hiscinema.com by getting the index file over a TCP connection
+        // Chooses the video number
         String IP = ip1;
         Socket tcpServer = new Socket(ip2, 40401);
         DatagramSocket server= new DatagramSocket(40405);
@@ -25,6 +23,7 @@ public class Client {
 
         JFrame frame = new JFrame();
         JOptionPane.showMessageDialog(frame, "open hiscinema.com?");
+        System.out.println("Found: " + tcpServer);
 
         BufferedReader input = new BufferedReader(new InputStreamReader(tcpServer.getInputStream()));
         String url = input.readLine();
@@ -37,7 +36,8 @@ public class Client {
         sleep(3000);
         System.out.println("wait...");
 
-        //Part 2
+        // Part 2
+        // Sends UDP packet
         byte[] buffer = videoNumber.getBytes();
         DatagramPacket packet = new DatagramPacket(buffer,buffer.length,address,40400);
         server.send(packet);
@@ -45,15 +45,19 @@ public class Client {
         sleep(3000);
         System.out.println("wait...");
 
-        //Part 5
+        // Part 5
+        // Receives UDP packet
         byte buffer2[] = new byte[128];
         packet = new DatagramPacket(buffer2,buffer2.length);
         server.receive(packet);
         String response = new String(packet.getData(),0,packet.getLength());
         System.out.println(response + " is herCDNs IP");
-        //ReceiveFile file = new ReceiveFile();
+
+        // Part 6
+        // Receives the video file from the TCP connection
         String NEWFILENAME = "src/newvideo.mp4";
         Socket socket = new Socket(ip2, 40400);
+        System.out.println("Found: " + socket);
         System.out.println("Connecting");
 
         byte[] fileBuffer = new byte[400000];
