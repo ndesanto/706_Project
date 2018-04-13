@@ -11,10 +11,11 @@ public class ClientServer {
     public static String port = configuration.PORT;
 
     public static void main(String[] args) throws IOException {
+        // Part 1
         String IP = ip1;
         byte buffer[] = new byte[128];
         DatagramSocket server = new DatagramSocket(40400);
-        ServerSocket listener = new ServerSocket(40400);
+            //ServerSocket listener = new ServerSocket(40400);
         System.out.println("Running ClientServer....");
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 server.receive(packet);
@@ -22,11 +23,14 @@ public class ClientServer {
                 InetAddress a = packet.getAddress();
                 packet = new DatagramPacket(buffer, buffer.length,a,p);
                 String answer = new String(packet.getData(), 0, packet.getLength());
+
                 System.out.println(answer);
-                if (answer.equals("1")) {
+                if (Integer.parseInt(answer.trim()) == 1) {
                     System.out.println("hello");
-                    
+
                 }
+                else
+                    System.out.println("notwork");
         }
 
 

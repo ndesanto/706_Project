@@ -15,24 +15,28 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
 
+        //Part 1
         DatagramSocket toServ= new DatagramSocket();
         String IP = ip1;
-        String url = "src/index.html";
+
         InetAddress a = InetAddress.getByName(IP);
 
         JFrame frame = new JFrame();
         String words = "open hiscinema.com?";
-        File htmlFile = new File(url);
+
         JOptionPane.showMessageDialog(frame, words);
         Socket s = new Socket(ip2, 40401);
 
         BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        String answer = input.readLine();
-
+        String url = input.readLine();
+        System.out.println(url);
+        File htmlFile = new File(url);
         Desktop.getDesktop().browse(htmlFile.toURI());
+
         String videonum = JOptionPane.showInputDialog( "Which video would you like to watch?");
         System.out.println(videonum);
 
+        //Part 2
         byte[] buffer = videonum.getBytes();
         DatagramPacket pack = new DatagramPacket(buffer,buffer.length,a,40400);
         toServ.send(pack);

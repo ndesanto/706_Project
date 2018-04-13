@@ -15,22 +15,14 @@ public class HCServer {
     public static void main(String[] args) throws IOException {
         ServerSocket listener = new ServerSocket(40401);
         System.out.println("Running hisCinema Server....");
-        try {
-            while (true) {
+
                 Socket socket = listener.accept();
-                try {
-                    PrintWriter out =
-                            new PrintWriter(socket.getOutputStream(), true);
-                    out.println("Socket Address: " + socket.getLocalSocketAddress() + "Port: " + socket.getLocalPort() + "Remote Socket Address: " + socket.getRemoteSocketAddress());
-                } finally {
-                    socket.close();
+
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    out.println("src/index.html");
+
                 }
-            }
-        }
-        finally {
-            listener.close();
-        }
-
-
-    }
 }
+
+
+
